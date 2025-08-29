@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404//fracture</title>
+  <link rel="stylesheet" href="design.css">
+</head>
+<body>
+  <div class="glitch-wrapper">
+    <h1 class="glitch" data-text="fracture">fracture</h1>
+    <p class="subtitle">enter the void</p>
+  </div>
+
+  <div class="noise"></div>
+  <script>
+    // Random mysterious text flicker
+    const subtitles = [
+      "enter the void",
+      "system corrupt...",
+      "signal lost",
+      "error: reality not found",
+      "booting chaos.exe"
+    ];
+    const subtitleEl = document.querySelector(".subtitle");
+    setInterval(() => {
+      const random = subtitles[Math.floor(Math.random() * subtitles.length)];
+      subtitleEl.textContent = random;
+    }, 3000);
+  </script>
+</body>
+</html>
