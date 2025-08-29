@@ -56,8 +56,9 @@
 
   <!-- New gacha system -->
   <div class="gacha-box">
-    <h2>⚡ Summon Sequence ⚡</h2>
+    <h2> Summon </h2>
     <button class="gacha-btn" onclick="rollGacha()">Initiate Summon</button>
+    <div class="summon-animation" id="summon-animation"></div>
     <div class="result" id="result"></div>
   </div>
 
@@ -80,11 +81,12 @@
 
     // Gacha system (using waifus for now)
     const waifus = [
-      { name: "Miku", img: "https://placewaifu.com/image/200" },
-      { name: "Sakura", img: "https://placewaifu.com/image/201" },
-      { name: "Asuna", img: "https://placewaifu.com/image/202" },
-      { name: "Rem", img: "https://placewaifu.com/image/203" },
-      { name: "Hinata", img: "https://placewaifu.com/image/204" }
+      { name: "Miku", img: "https://ph.pinterest.com/pin/406309197651034863/" },
+      { name: "Sakura", img: "https://ph.pinterest.com/pin/602426887690980582/" },
+      { name: "Asuna", img: "https://ph.pinterest.com/pin/290834088453356909/" },
+      { name: "Rem", img: "https://ph.pinterest.com/pin/587508713931841285/" },
+      { name: "Hinata", img: "https://ph.pinterest.com/pin/770678555023322843/" },
+      { name: "Kaguya", img: "https://ph.pinterest.com/pin/589971619976832549/" }
     ];
 
     function rollGacha() {
