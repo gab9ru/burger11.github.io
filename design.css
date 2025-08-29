@@ -94,3 +94,59 @@ body {
   0% { background-position: 0 0; }
   100% { background-position: 100% 100%; }
 }
+/* Gacha Box */
+.gacha-box {
+  margin-top: 40px;
+  padding: 20px;
+  border: 2px solid #0ff;
+  border-radius: 10px;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.7);
+  box-shadow: 0 0 12px #0ff, 0 0 24px #f0f;
+  animation: boxPulse 2s infinite alternate;
+}
+
+/* Gacha Button */
+.gacha-btn {
+  background: black;
+  border: 2px solid #0ff;
+  padding: 12px 24px;
+  margin-top: 15px;
+  font-size: 1rem;
+  font-family: 'Share Tech Mono', monospace;
+  cursor: pointer;
+  color: #0ff;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.gacha-btn:hover {
+  background: #0ff;
+  color: black;
+  text-shadow: 0 0 8px #000;
+  box-shadow: 0 0 10px #0ff, 0 0 20px #f0f;
+}
+
+/* Gacha Result */
+.result {
+  margin-top: 20px;
+  font-size: 1.2rem;
+  color: #f0f;
+  text-shadow: 0 0 5px #0ff;
+}
+
+.result img {
+  margin-top: 15px;
+  border-radius: 12px;
+  max-width: 200px;
+  border: 2px solid #0ff;
+  box-shadow: 0 0 8px #0ff, 0 0 15px #f0f;
+}
+
+/* Gacha Box Pulse Effect */
+@keyframes boxPulse {
+  from { box-shadow: 0 0 10px #0ff, 0 0 20px #f0f; }
+  to   { box-shadow: 0 0 20px #f0f, 0 0 40px #0ff; }
+}

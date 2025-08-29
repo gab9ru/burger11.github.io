@@ -5,6 +5,48 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>404//fracture</title>
   <link rel="stylesheet" href="design.css">
+  <style>
+    /* Extra styling for gacha box, fits into glitchy vibe */
+    .gacha-box {
+      margin-top: 40px;
+      padding: 20px;
+      border: 2px solid #0ff;
+      border-radius: 10px;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.6);
+    }
+
+    .gacha-btn {
+      background: #0ff;
+      border: none;
+      padding: 12px 24px;
+      margin-top: 15px;
+      font-size: 18px;
+      font-family: monospace;
+      cursor: pointer;
+      color: #000;
+      border-radius: 6px;
+      transition: background 0.2s ease;
+    }
+
+    .gacha-btn:hover {
+      background: #f0f;
+      color: #fff;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #0ff;
+    }
+
+    .result img {
+      margin-top: 15px;
+      border-radius: 12px;
+      max-width: 200px;
+      border: 2px solid #0ff;
+    }
+  </style>
 </head>
 <body>
   <div class="glitch-wrapper">
@@ -12,9 +54,17 @@
     <p class="subtitle">enter the void</p>
   </div>
 
+  <!-- New gacha system -->
+  <div class="gacha-box">
+    <h2>⚡ Summon Sequence ⚡</h2>
+    <button class="gacha-btn" onclick="rollGacha()">Initiate Summon</button>
+    <div class="result" id="result"></div>
+  </div>
+
   <div class="noise"></div>
+
   <script>
-    // Random mysterious text flicker
+    // Subtitle flicker
     const subtitles = [
       "enter the void",
       "system corrupt...",
@@ -27,6 +77,22 @@
       const random = subtitles[Math.floor(Math.random() * subtitles.length)];
       subtitleEl.textContent = random;
     }, 3000);
+
+    // Gacha system (using waifus for now)
+    const waifus = [
+      { name: "Miku", img: "https://placewaifu.com/image/200" },
+      { name: "Sakura", img: "https://placewaifu.com/image/201" },
+      { name: "Asuna", img: "https://placewaifu.com/image/202" },
+      { name: "Rem", img: "https://placewaifu.com/image/203" },
+      { name: "Hinata", img: "https://placewaifu.com/image/204" }
+    ];
+
+    function rollGacha() {
+      const random = waifus[Math.floor(Math.random() * waifus.length)];
+      document.getElementById("result").innerHTML =
+        `<p>Summoned: <strong>${random.name}</strong></p>
+         <img src="${random.img}" alt="${random.name}">`;
+    }
   </script>
 </body>
 </html>
