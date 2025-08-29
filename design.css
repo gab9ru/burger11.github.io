@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: black;
+  color: #0ff;
+  font-family: 'Share Tech Mono', monospace;
+  overflow: hidden;
+}
+
+/* Glitch text */
+.glitch {
+  position: relative;
+  font-size: 5rem;
+  color: #754141;
+  letter-spacing: 4px;
+  animation: flicker 2s infinite;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+}
+
+.glitch::before {
+  animation: glitchTop 2s infinite linear alternate-reverse;
+  clip: rect(0, 900px, 0, 0);
+  color: #f0f;
+}
+
+.glitch::after {
+  animation: glitchBottom 1.5s infinite linear alternate-reverse;
+  clip: rect(0, 900px, 0, 0);
+  color: #0ff;
+}
+
+/* Subtitle flicker */
+.subtitle {
+  margin-top: 20px;
+  font-size: 1.2rem;
+  color: #ccc;
+  opacity: 0.8;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* Noise overlay */
+.noise {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('https://i.imgur.com/1rXnB3Q.png');
+  opacity: 0.05;
+  pointer-events: none;
+  animation: noiseMove 0.2s infinite;
+}
+
+/* Keyframes */
+@keyframes glitchTop {
+  0% { clip: rect(0, 9999px, 0, 0); }
+  25% { clip: rect(0, 9999px, 50px, 0); }
+  50% { clip: rect(0, 9999px, 10px, 0); }
+  75% { clip: rect(0, 9999px, 100px, 0); }
+  100% { clip: rect(0, 9999px, 75px, 0); }
+}
+
+@keyframes glitchBottom {
+  0% { clip: rect(100px, 9999px, 9999px, 0); }
+  25% { clip: rect(10px, 9999px, 9999px, 0); }
+  50% { clip: rect(75px, 9999px, 9999px, 0); }
+  75% { clip: rect(20px, 9999px, 9999px, 0); }
+  100% { clip: rect(50px, 9999px, 9999px, 0); }
+}
+
+@keyframes flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+  20%, 24%, 55% { opacity: 0; }
+}
+
+@keyframes noiseMove {
+  0% { background-position: 0 0; }
+  100% { background-position: 100% 100%; }
+}
