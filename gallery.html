@@ -115,46 +115,18 @@
     <img src="images/eh.jpg" alt="Photo 3" class="gallery-photo">
   </div>
 
-  <!-- Gacha Summon Button -->
-  <div class="gacha-box">
-    <button onclick="rollGacha()" class="gacha-btn">Summon</button>
-    <div class="result" id="result"></div>
-  </div>
+<!-- Currency Display -->
+<div id="currency-box" style="margin:20px; font-size:1.4rem; text-shadow:0 0 5px #0ff, 0 0 10px #f0f;">
+  💎 Gems: <span id="currency">10</span>
+</div>
 
-<script>
-  // Creepy/mysterious subtitle flicker
-  const subtitles = [
-    "Nigger detected",
-    "What the helly",
-    "Welcome lol",
-    "This site is barely working",
-    "Thank you Chatgpt",
-    "WHAT!!",
-    "soul not found",
-    "wake up..."
-  ];
-  const subtitleEl = document.querySelector(".subtitle");
-  setInterval(() => {
-    const random = subtitles[Math.floor(Math.random() * subtitles.length)];
-    subtitleEl.textContent = random;
-  }, 3000);
+<!-- Gacha Box -->
+<div class="gacha-box">
+  <button onclick="rollGacha()" class="gacha-btn">Summon (Cost: 3 💎)</button>
+  <div class="result" id="result"></div>
+</div>
 
-  // Gacha system with customizable images
-  const waifus = [
-    { name: "Yelan", img: "images/yelan.jpg" },
-    { name: "Frieren", img: "images/freren.jpg" },
-    { name: "Mambo", img: "images/mambo" },
-    { name: "Racist", img: "images/neckhurts" }
-  ];
-
-  function rollGacha() {
-    const random = waifus[Math.floor(Math.random() * waifus.length)];
-    document.getElementById("result").innerHTML = `
-      <p>Summoned: <strong>${random.name}</strong></p>
-      <img src="${random.img}" alt="${random.name}">
-    `;
-  }
-</script>
+<script src="gallery.js"></script>
 
 </body>
 </html>

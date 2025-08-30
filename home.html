@@ -1,2 +1,86 @@
 <!DOCTYPE html>
-<
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chaos Page</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: black;
+      overflow: hidden;
+      font-family: monospace;
+      color: #0ff;
+      text-align: center;
+    }
+    .chaos-text {
+      font-size: 3em;
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      transition: all 0.2s ease;
+      z-index: 2;
+    }
+    .overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: black;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 5;
+      transition: opacity 0.1s;
+    }
+  </style>
+</head>
+<body>
+  <div class="chaos-text" id="chaosText">Click Me...</div>
+  <div class="overlay" id="overlay"></div>
+
+  <script>
+    const chaosText = document.getElementById("chaosText");
+    const overlay = document.getElementById("overlay");
+
+    chaosText.addEventListener("click", () => {
+      // Start "chaos mode"
+      let interval = setInterval(() => {
+        // Flash background
+        document.body.style.background = 
+          `rgb(${Math.random()*255}, ${Math.random()*255}, ${Math.random()*255})`;
+
+        // Shake text
+        chaosText.style.top = Math.random()*90 + "%";
+        chaosText.style.left = Math.random()*90 + "%";
+
+        // Clone spam
+        let clone = chaosText.cloneNode(true);
+        clone.textContent = "ERROR!";
+        clone.style.top = Math.random()*90 + "%";
+        clone.style.left = Math.random()*90 + "%";
+        document.body.appendChild(clone);
+      }, 100);
+
+      // Fake "lockup" after 5s
+      setTimeout(() => {
+        clearInterval(interval);
+        overlay.style.opacity = 1;
+        overlay.innerHTML = "<h1 style='color:red; font-size:5em; text-align:center; margin-top:40vh;'>SYSTEM FAILURE</h1>";
+      }, 5000);
+    });
+  </script>
+
+  <script>
+  setTimeout(() => {
+    // Try to close the tab
+    window.close();
+
+    // If blocked, fallback to blank screen
+    window.location.href = "about:blank";
+  }, 6000); // 6 seconds after failure
+</script>
+
+</body>
+</html>
+

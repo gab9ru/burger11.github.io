@@ -6,77 +6,95 @@
   <title>Main Menu</title>
   <link rel="stylesheet" href="design.css">
   <style>
-    /* Minimal menu styling */
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: black;
-      font-family: 'Share Tech Mono', monospace;
-      color: #0ff;
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: url('background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Share Tech Mono', monospace;
+    color: #0ff;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Dim overlay */
+  body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.65); /* darkness overlay */
+    z-index: 0;
+  }
+
+  .menu-container {
+    position: relative;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 40px 60px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px #0ff, 0 0 40px #f0f;
+    text-align: center;
+    animation: pulseGlow 3s infinite alternate;
+  }
+
+  .menu-title {
+    font-size: 3rem;
+    margin-bottom: 40px;
+    letter-spacing: 3px;
+    color: #0ff;
+    text-shadow: 0 0 8px #0ff, 0 0 16px #f0f, 0 0 32px #0ff;
+  }
+
+  .menu-links a {
+    display: block;
+    margin: 20px 0;
+    font-size: 1.6rem;
+    color: #0ff;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    text-shadow: 0 0 5px #0ff;
+  }
+
+  .menu-links a:hover {
+    color: rgb(51, 47, 51);
+    text-shadow: 0 0 8px rgb(22, 21, 22), 0 0 16px rgb(35, 37, 37), 0 0 32px rgb(250, 250, 250);
+    transform: scale(1.05);
+  }
+
+  /* Subtle glowing animation */
+  @keyframes pulseGlow {
+    from {
+      box-shadow: 0 0 20px #0ff, 0 0 40px rgb(112, 109, 112);
     }
-
-    .menu-container {
-      background: rgba(0, 0, 0, 0.7);
-      padding: 40px 60px;
-      border-radius: 12px;
-      box-shadow: 0 0 20px #0ff, 0 0 10px #f0f;
-      text-align: center;
+    to {
+      box-shadow: 0 0 40px #0ff, 0 0 80px #f0f;
     }
+  }
+</style>
 
-    .menu-title {
-      font-size: 3rem;
-      margin-bottom: 40px;
-      letter-spacing: 3px;
-      color: #0ff;
-      text-shadow: 0 0 8px #0ff, 0 0 16px #f0f;
-    }
-
-    .menu-links a {
-      display: block;
-      margin: 20px 0;
-      font-size: 1.6rem;
-      color: #0ff;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      text-shadow: 0 0 5px #0ff;
-    }
-
-    .menu-links a:hover {
-      color: #f0f;
-      text-shadow: 0 0 8px #f0f, 0 0 16px #0ff;
-    }
-  </style>
-
-<script>
-  // Creepy/mysterious subtitle flicker
-  const subtitles = [
-    "IM TOO LAZY",
-    "WOW WELCOME",
-    "Welcome lol",
-    "This site is barely working",
-    "Thank you Chatgpt",
-    "WHAT!!",
-    "PALDO",
-    "PALDO LOL"
-  ];
-  const subtitleEl = document.querySelector(".menu-title");
-  setInterval(() => {
-    const random = subtitles[Math.floor(Math.random() * subtitles.length)];
-    subtitleEl.textContent = random;
-  }, 3000);
-</script>
-
-</head>
 <body>
+  <!-- Video background -->
+  <video autoplay muted loop id="bg-video">
+    <source src="videos/lain.mp4" type="video/mp4">
+    Your browser does not support HTML5 video.
+  </video>
+
+  <!-- Dim overlay -->
+  <div class="overlay"></div>
+
+  <!-- Menu -->
   <div class="menu-container">
     <h1 class="menu-title">Welcome</h1>
     <div class="menu-links">
       <a href="home.html">Home</a>
       <a href="gallery.html">Gallery</a>
+      <a href="roulette.html">Earn</a>
     </div>
   </div>
 </body>
-</html>

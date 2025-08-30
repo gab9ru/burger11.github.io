@@ -8,65 +8,109 @@
 <div class="loading-bar-container">
   <div class="loading-bar"></div>
 </div>
+
 <style>
-  body {
-    margin: 0;
-    background: #000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    overflow: hidden;
-    font-family: monospace;
-    color: #0ff;
-    position: relative;
-    /* For screen shake */
-    transition: transform 0.2s cubic-bezier(.4,0,.2,1);
-  }
-
-  .glitch {
-    font-size: 3em;
-    position: relative;
-    color: #0ff;
-    animation: flicker 2s infinite, glitch-shake 2s infinite;
-    text-shadow: 2px 0 #f0f, -2px 0 #0ff;
-    z-index: 2;
-  }
-
-  @keyframes flicker {
-    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
-      opacity: 1;
+    body {
+      background: #000;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #0ff;
+      font-family: 'Share Tech Mono', monospace;
+      overflow: hidden;
+      position: relative;
     }
-    20%, 24%, 55% {
-      opacity: 0.2;
+
+    .glitch {
+      font-size: 3rem;
+      position: relative;
+      color: #0ff;
+      text-shadow: 2px 0 #f0f, -2px 0 #0ff;
+      animation: flicker 2s infinite;
+      margin-bottom: 20px;
+    }
+
+    .progress-text {
+      font-size: 1.5rem;
+      margin-top: 12px;
+      color: #f0f;
+      text-shadow: 0 0 6px #0ff;
+    }
+
+    .loading-msg {
+      margin-top: 20px;
+      font-size: 1rem;
+      color: #999;
+      opacity: 0.8;
+    }
+
+    .scanline {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: rgba(0,255,255,0.2);
+      animation: scan 2s linear infinite;
+    }
+
+    @keyframes scan {
+      from { top: 0; }
+      to { top: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="glitch">LOADING SYSTEM...</div>
+  <div class="loading-bar-container">
+    <div class="loading-bar"></div>
+  </div>
+  <div class="progress-text" id="progress-text">0%</div>
+  <div class="loading-msg" id="loading-msg">Initializing...</div>
+  <div class="scanline"></div>
+
+<script>
+(() => {
+  const loadingBar = document.querySelector('.loading-bar');
+  const progressText = document.getElementById('progress-text');
+  const loadingMsg = document.getElementById('loading-msg');
+  let progress = 0;
+
+  const messages = [
+    "Initializing core...",
+    "Decrypting assets...",
+    "Compiling shaders...",
+    "Loading textures...",
+    "Contacting server...",
+    "Establishing secure link...",
+    "System ready..."
+  ];
+
+  function animateLoading() {
+    progress += Math.random() * 8 + 5;
+    if (progress > 100) progress = 100;
+
+    loadingBar.style.width = progress + '%';
+    progressText.textContent = Math.floor(progress) + '%';
+
+    if (progress < 100) {
+      loadingMsg.textContent = messages[Math.floor(Math.random() * messages.length)];
+      setTimeout(animateLoading, 500);
+    } else {
+      loadingMsg.textContent = "Boot complete!";
+      setTimeout(() => {
+        window.location.href = "menu.html"; 
+      }, 1500);
     }
   }
 
-  @keyframes glitch-shake {
-    0% { transform: translate(0, 0); }
-    10% { transform: translate(-1px, 1px); }
-    20% { transform: translate(1px, -1px); }
-    30% { transform: translate(-1px, 1px); }
-    40% { transform: translate(1px, 0); }
-    100% { transform: translate(0, 0); }
-  }
+  document.addEventListener("DOMContentLoaded", animateLoading);
+})();
+</script>
 
-  .scanline {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: rgba(0,255,255,0.2);
-    animation: scan 2s linear infinite;
-    z-index: 1;
-  }
-
-  @keyframes scan {
-    from { top: 0; }
-    to { top: 100%; }
-  }
-</style>
 <script>
   // Screen shake effect on body
   function shakeBody() {
@@ -94,19 +138,4 @@
     loadingBar = document.querySelector('.loading-bar');
     animateLoadingBar();
   });
-</script>
-</head>
-<body>
-  <div class="glitch">Let me cook!...</div>
-  <div class="scanline"></div>
-</style>
-</head>
-<body>
-  <script>
-    // Redirect to menu.html after delay
-    setTimeout(() => {
-      window.location.href = "menu.html";
-    }, 4000); // 4 seconds
   </script>
-  </body>
-</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roulette Money Spinner</title>
+  <style>
+    body {
+      background: black;
+      color: #0ff;
+      font-family: 'Share Tech Mono', monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .currency {
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+      text-shadow: 0 0 5px #0ff;
+    }
+
+    .roulette-container {
+      width: 400px;
+      height: 160px;
+      overflow: hidden;
+      border: 2px solid #0ff;
+      border-radius: 12px;
+      box-shadow: 0 0 20px #0ff, 0 0 20px #f0f inset;
+      position: relative;
+      background: rgba(0,0,0,0.7);
+    }
+
+    .roulette-strip {
+      display: flex;
+    }
+
+    .item {
+      width: 150px;
+      height: 150px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.6);
+      border: 2px solid #0ff;
+      margin: 0 5px;
+      border-radius: 10px;
+      box-shadow: 0 0 12px #0ff, 0 0 15px #f0f;
+      font-size: 1.2rem;
+      color: gold;
+      font-weight: bold;
+    }
+
+    .spin-btn {
+      margin-top: 30px;
+      padding: 12px 24px;
+      border: 2px solid #0ff;
+      border-radius: 6px;
+      background: black;
+      color: #0ff;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .spin-btn:hover {
+      background: #0ff;
+      color: black;
+      box-shadow: 0 0 15px #0ff, 0 0 25px #f0f;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 1.4rem;
+      text-shadow: 0 0 8px #f0f, 0 0 15px #0ff;
+    }
+
+    /* Indicator */
+    .indicator {
+      position: absolute;
+      top: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0; 
+      height: 0; 
+      border-left: 15px solid transparent;
+      border-right: 15px solid transparent;
+      border-bottom: 20px solid #f0f;
+      filter: drop-shadow(0 0 10px #0ff);
+    }
+  </style>
+</head>
+<body>
+  <h1>💰 Money Roulette 💰</h1>
+  <div class="currency">Total Money: <span id="credits">0</span></div>
+
+  <div class="roulette-container">
+    <div class="indicator"></div>
+    <div class="roulette-strip" id="roulette">
+      <div class="item">+10</div>
+      <div class="item">+50</div>
+      <div class="item">+100</div>
+      <div class="item">+200</div>
+      <div class="item">+500</div>
+    </div>
+  </div>
+
+  <button class="spin-btn" onclick="spin()">Spin</button>
+  <div class="result" id="result">Press spin to win money!</div>
+
+<script>
+  let gems = parseInt(localStorage.getItem("gems")) || 0;
+  let spinning = false;
+  const gemsEl = document.getElementById("credits");
+  const resultEl = document.getElementById("result");
+  const roulette = document.getElementById("roulette");
+
+  // Display saved gems when page loads
+  gemsEl.textContent = gems;
+
+  function spin() {
+    if (spinning) return;
+
+    spinning = true;
+    resultEl.textContent = "Spinning...";
+
+    const items = document.querySelectorAll(".item");
+    const randomIndex = Math.floor(Math.random() * items.length);
+
+    // duplicate strip for smooth spin
+    roulette.innerHTML += roulette.innerHTML;
+
+    const itemWidth = 160;
+    const spins = 10;
+    const finalOffset = -(randomIndex * itemWidth + spins * items.length * itemWidth);
+
+    roulette.style.transition = "transform 4s cubic-bezier(0.25, 1, 0.5, 1)";
+    roulette.style.transform = `translateX(${finalOffset}px)`;
+
+    setTimeout(() => {
+      spinning = false;
+      const winnerText = items[randomIndex].textContent;
+      const amount = parseInt(winnerText.replace("+", ""));
+      gems += amount;
+      gemsEl.textContent = gems;
+      resultEl.textContent = `You won ${amount} 💎 gems! 🎉`;
+
+      // Save gems permanently
+      localStorage.setItem("gems", gems);
+
+      // reset strip
+      roulette.style.transition = "none";
+      roulette.style.transform = `translateX(${-(randomIndex * itemWidth)}px)`;
+      roulette.innerHTML = "";
+      items.forEach(i => roulette.appendChild(i.cloneNode(true)));
+    }, 4000);
+  }
+</script>
+</body>
+</html>
