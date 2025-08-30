@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Credits</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      background: black;
+      font-family: 'Share Tech Mono', monospace;
+      color: #0ff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Background video */
+    video.bg-video {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: -2;
+      filter: brightness(0.3) contrast(1.2) saturate(1.2);
+    }
+
+    /* Static overlay */
+    .static {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: url("images/static.gif");
+      opacity: 0.15;
+      mix-blend-mode: screen;
+      z-index: -1;
+    }
+
+    /* Scrolling credits */
+    .credits {
+      position: relative;
+      width: 80%;
+      max-width: 600px;
+      text-align: center;
+      font-size: 1.4rem;
+      line-height: 2rem;
+      animation: scroll 40s linear infinite;
+      text-shadow: 0 0 5px #f0f, 0 0 10px #0ff;
+    }
+
+    @keyframes scroll {
+      0% { transform: translateY(100%); }
+      100% { transform: translateY(-120%); }
+    }
+
+    /* Glitch effect */
+    .glitch {
+      position: relative;
+      display: inline-block;
+    }
+
+    .glitch::before, .glitch::after {
+      content: attr(data-text);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      overflow: hidden;
+      clip: rect(0, 900px, 0, 0);
+    }
+
+    .glitch::before {
+      left: 2px;
+      text-shadow: -2px 0 #f0f;
+      animation: glitch 2s infinite linear alternate-reverse;
+    }
+
+    .glitch::after {
+      left: -2px;
+      text-shadow: -2px 0 #0ff;
+      animation: glitch 3s infinite linear alternate-reverse;
+    }
+
+    @keyframes glitch {
+      0% { clip: rect(0, 9999px, 0, 0); }
+      20% { clip: rect(0, 9999px, 100%, 0); }
+      40% { clip: rect(0, 9999px, 30%, 0); }
+      60% { clip: rect(0, 9999px, 70%, 0); }
+      80% { clip: rect(0, 9999px, 20%, 0); }
+      100% { clip: rect(0, 9999px, 50%, 0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background -->
+  <video autoplay loop muted class="bg-video">
+    <source src="videos/emilia.mp4" type="video/mp4">
+  </video>
+  <div class="static"></div>
+
+  <!-- Credits -->
+  <div class="credits">
+    <p class="glitch" data-text="CREDITS">CREDITS</p>
+    <br><br>
+    <p>Project by: <span class="glitch" data-text="gab9ru">gab9ru</span></p>
+    <p>Assisted by: <span class="glitch" data-text="ai">ai for most of the programming</span></p>
+    <p>Style Inspired by: Serial Experiments Lain</p>
+    <br><br>
+    <p>Thanks for using this lol</p>
+  </div>
+
+</body>
+</html>
