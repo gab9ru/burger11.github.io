@@ -5,99 +5,108 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SITE NA GAWA NI GAB FRFR</title>
   <link rel="stylesheet" href="design.css">
-  <style>
-    /* Extra styling for gacha box, fits into glitchy vibe */
-    .gacha-box {
-      margin-top: 40px;
-      padding: 20px;
-      border: 2px solid #0ff;
-      border-radius: 10px;
-      text-align: center;
-      background: rgba(0, 0, 0, 0.6);
-    }
+<div class="loading-bar-container">
+  <div class="loading-bar"></div>
+</div>
+<style>
+  body {
+    margin: 0;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden;
+    font-family: monospace;
+    color: #0ff;
+    position: relative;
+    /* For screen shake */
+    transition: transform 0.2s cubic-bezier(.4,0,.2,1);
+  }
 
-    .gacha-btn {
-      background: #0ff;
-      border: none;
-      padding: 12px 24px;
-      margin-top: 15px;
-      font-size: 18px;
-      font-family: monospace;
-      cursor: pointer;
-      color: #000;
-      border-radius: 6px;
-      transition: background 0.2s ease;
-    }
+  .glitch {
+    font-size: 3em;
+    position: relative;
+    color: #0ff;
+    animation: flicker 2s infinite, glitch-shake 2s infinite;
+    text-shadow: 2px 0 #f0f, -2px 0 #0ff;
+    z-index: 2;
+  }
 
-    .gacha-btn:hover {
-      background: #f0f;
-      color: #fff;
+  @keyframes flicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+      opacity: 1;
     }
+    20%, 24%, 55% {
+      opacity: 0.2;
+    }
+  }
 
-    .result {
-      margin-top: 20px;
-      font-size: 18px;
-      color: rgb(56, 129, 129);
-    }
+  @keyframes glitch-shake {
+    0% { transform: translate(0, 0); }
+    10% { transform: translate(-1px, 1px); }
+    20% { transform: translate(1px, -1px); }
+    30% { transform: translate(-1px, 1px); }
+    40% { transform: translate(1px, 0); }
+    100% { transform: translate(0, 0); }
+  }
 
-    .result img {
-      margin-top: 15px;
-      border-radius: 12px;
-      max-width: 200px;
-      border: 2px solid #0ff;
+  .scanline {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: rgba(0,255,255,0.2);
+    animation: scan 2s linear infinite;
+    z-index: 1;
+  }
+
+  @keyframes scan {
+    from { top: 0; }
+    to { top: 100%; }
+  }
+</style>
+<script>
+  // Screen shake effect on body
+  function shakeBody() {
+    document.body.style.transform = `translate(${Math.random()*8-4}px, ${Math.random()*8-4}px)`;
+    setTimeout(() => {
+      document.body.style.transform = '';
+    }, 80);
+  }
+
+  // Loading bar animation
+  let loadingBar;
+  let progress = 0;
+  function animateLoadingBar() {
+    if (!loadingBar) return;
+    progress += Math.random() * 7 + 3; // random progress for glitchy effect
+    if (progress > 100) progress = 100;
+    loadingBar.style.width = progress + '%';
+    shakeBody();
+    if (progress < 100) {
+      setTimeout(animateLoadingBar, 200);
     }
-  </style>
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    loadingBar = document.querySelector('.loading-bar');
+    animateLoadingBar();
+  });
+</script>
 </head>
 <body>
-  <div class="glitch-wrapper">
-    <h1 class="glitch" data-text="fracture">fracture</h1>
-    <p class="subtitle">enter the void</p>
-  </div>
-
-  <!-- New gacha system -->
-  <div class="gacha-box">
-    <h2> Summon </h2>
-    <button class="gacha-btn" onclick="rollGacha()">Initiate Summon</button>
-    <div class="summon-animation" id="summon-animation"></div>
-    <div class="result" id="result"></div>
-  </div>
-
-  <div class="noise"></div>
-
+  <div class="glitch">Let me cook!...</div>
+  <div class="scanline"></div>
+</style>
+</head>
+<body>
   <script>
-    // Subtitle flicker
-    const subtitles = [
-      "nigger detected...",
-      "massive skill issue",
-      "such a simp",
-      "my kneck hurts",
-      "BURGERKING FOOT LETTUCE",
-      "LOL",
-      "WHAT LOL BASED",
-      "WHAT"
-    ];
-    const subtitleEl = document.querySelector(".subtitle");
-    setInterval(() => {
-      const random = subtitles[Math.floor(Math.random() * subtitles.length)];
-      subtitleEl.textContent = random;
-    }, 3000);
-
-    // Gacha system (using waifus for now)
-    const waifus = [
-      { name: "Miku", img: "https://ph.pinterest.com/pin/406309197651034863/" },
-      { name: "Sakura", img: "https://ph.pinterest.com/pin/602426887690980582/" },
-      { name: "Asuna", img: "https://ph.pinterest.com/pin/290834088453356909/" },
-      { name: "Rem", img: "https://ph.pinterest.com/pin/587508713931841285/" },
-      { name: "Hinata", img: "https://ph.pinterest.com/pin/770678555023322843/" },
-      { name: "Kaguya", img: "https://ph.pinterest.com/pin/589971619976832549/" }
-    ];
-
-    function rollGacha() {
-      const random = waifus[Math.floor(Math.random() * waifus.length)];
-      document.getElementById("result").innerHTML =
-        `<p>Summoned: <strong>${random.name}</strong></p>
-         <img src="${random.img}" alt="${random.name}">`;
-    }
+    // Redirect to menu.html after delay
+    setTimeout(() => {
+      window.location.href = "menu.html";
+    }, 4000); // 4 seconds
   </script>
-</body>
+  </body>
 </html>

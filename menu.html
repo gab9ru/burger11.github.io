@@ -3,30 +3,80 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>404//fracture</title>
+  <title>Main Menu</title>
   <link rel="stylesheet" href="design.css">
+  <style>
+    /* Minimal menu styling */
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: black;
+      font-family: 'Share Tech Mono', monospace;
+      color: #0ff;
+    }
+
+    .menu-container {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 40px 60px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px #0ff, 0 0 10px #f0f;
+      text-align: center;
+    }
+
+    .menu-title {
+      font-size: 3rem;
+      margin-bottom: 40px;
+      letter-spacing: 3px;
+      color: #0ff;
+      text-shadow: 0 0 8px #0ff, 0 0 16px #f0f;
+    }
+
+    .menu-links a {
+      display: block;
+      margin: 20px 0;
+      font-size: 1.6rem;
+      color: #0ff;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      text-shadow: 0 0 5px #0ff;
+    }
+
+    .menu-links a:hover {
+      color: #f0f;
+      text-shadow: 0 0 8px #f0f, 0 0 16px #0ff;
+    }
+  </style>
+
+<script>
+  // Creepy/mysterious subtitle flicker
+  const subtitles = [
+    "IM TOO LAZY",
+    "WOW WELCOME",
+    "Welcome lol",
+    "This site is barely working",
+    "Thank you Chatgpt",
+    "WHAT!!",
+    "PALDO",
+    "PALDO LOL"
+  ];
+  const subtitleEl = document.querySelector(".menu-title");
+  setInterval(() => {
+    const random = subtitles[Math.floor(Math.random() * subtitles.length)];
+    subtitleEl.textContent = random;
+  }, 3000);
+</script>
+
 </head>
 <body>
-  <div class="glitch-wrapper">
-    <h1 class="glitch" data-text="fracture">fracture</h1>
-    <p class="subtitle">enter the void</p>
+  <div class="menu-container">
+    <h1 class="menu-title">Welcome</h1>
+    <div class="menu-links">
+      <a href="home.html">Home</a>
+      <a href="gallery.html">Gallery</a>
+    </div>
   </div>
-
-  <div class="noise"></div>
-  <script>
-    // Random mysterious text flicker
-    const subtitles = [
-      "enter the void",
-      "system corrupt...",
-      "signal lost",
-      "error: reality not found",
-      "booting chaos.exe"
-    ];
-    const subtitleEl = document.querySelector(".subtitle");
-    setInterval(() => {
-      const random = subtitles[Math.floor(Math.random() * subtitles.length)];
-      subtitleEl.textContent = random;
-    }, 3000);
-  </script>
 </body>
 </html>

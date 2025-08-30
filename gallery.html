@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery</title>
+  <link rel="stylesheet" href="design.css">
+  <style>
+    body {
+      background: black;
+      font-family: 'Share Tech Mono', monospace;
+      color: #0ff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+      overflow-x: hidden;
+    }
+
+    /* Mysterious subtitle */
+    .subtitle {
+      font-size: 1.8rem;
+      margin-bottom: 30px;
+      color: #0ff;
+      text-shadow: 0 0 5px #0ff, 0 0 10px #f0f;
+      animation: flicker 2s infinite;
+      text-align: center;
+    }
+
+    @keyframes flicker {
+      0%,19%,21%,23%,25%,54%,56%,100% {opacity:1;}
+      20%,24%,55% {opacity:0.1;}
+    }
+
+    /* Gallery grid */
+    .gallery-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 50px;
+    }
+
+    .gallery-photo {
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
+      border: 2px solid #0ff;
+      border-radius: 10px;
+      box-shadow: 0 0 8px #0ff, 0 0 15px #f0f;
+      transition: transform 0.3s, filter 0.3s;
+      cursor: pointer;
+    }
+
+    .gallery-photo:hover {
+      transform: scale(1.1) rotate(-2deg);
+      filter: brightness(1.3) hue-rotate(20deg);
+    }
+
+    /* Gacha Box */
+    .gacha-box {
+      padding: 20px;
+      border: 2px solid #0ff;
+      border-radius: 12px;
+      background: rgba(0,0,0,0.7);
+      box-shadow: 0 0 12px #0ff, 0 0 20px #f0f;
+      text-align: center;
+    }
+
+    .gacha-btn {
+      background: black;
+      border: 2px solid #0ff;
+      color: #0ff;
+      font-family: 'Share Tech Mono', monospace;
+      padding: 12px 24px;
+      font-size: 1.2rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .gacha-btn:hover {
+      color: black;
+      background: #0ff;
+      box-shadow: 0 0 15px #0ff, 0 0 25px #f0f;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 1.2rem;
+      color: #f0f;
+      text-shadow: 0 0 5px #0ff, 0 0 10px #f0f;
+    }
+
+    .result img {
+      margin-top: 15px;
+      width: 200px;
+      border-radius: 12px;
+      border: 2px solid #0ff;
+      box-shadow: 0 0 12px #0ff, 0 0 20px #f0f;
+    }
+  </style>
+</head>
+<body>
+
+  <h2 class="subtitle">Welcome to the Gallery…</h2>
+
+  <!-- Gallery of photos (customizable) -->
+  <div class="gallery-group" id="gallery">
+    <!-- Add/remove images easily here -->
+    <img src="images/lesgo.jpg" alt="Photo 1" class="gallery-photo">
+    <img src="images/burger.jpg" alt="Photo 2" class="gallery-photo">
+    <img src="images/eh.jpg" alt="Photo 3" class="gallery-photo">
+  </div>
+
+  <!-- Gacha Summon Button -->
+  <div class="gacha-box">
+    <button onclick="rollGacha()" class="gacha-btn">Summon</button>
+    <div class="result" id="result"></div>
+  </div>
+
+<script>
+  // Creepy/mysterious subtitle flicker
+  const subtitles = [
+    "Nigger detected",
+    "What the helly",
+    "Welcome lol",
+    "This site is barely working",
+    "Thank you Chatgpt",
+    "WHAT!!",
+    "soul not found",
+    "wake up..."
+  ];
+  const subtitleEl = document.querySelector(".subtitle");
+  setInterval(() => {
+    const random = subtitles[Math.floor(Math.random() * subtitles.length)];
+    subtitleEl.textContent = random;
+  }, 3000);
+
+  // Gacha system with customizable images
+  const waifus = [
+    { name: "Yelan", img: "images/yelan.jpg" },
+    { name: "Frieren", img: "images/freren.jpg" },
+    { name: "Mambo", img: "images/mambo" },
+    { name: "Racist", img: "images/neckhurts" }
+  ];
+
+  function rollGacha() {
+    const random = waifus[Math.floor(Math.random() * waifus.length)];
+    document.getElementById("result").innerHTML = `
+      <p>Summoned: <strong>${random.name}</strong></p>
+      <img src="${random.img}" alt="${random.name}">
+    `;
+  }
+</script>
+
+</body>
+</html>
